@@ -49,6 +49,7 @@ G_CardList = {
 
 G_deckBoardCoord = {['position'] = {-3.00, 0.96, 0.00}, ['rotation'] = {0.00, 90.00, 0.00}, ['scale'] = {2.50, 1.00, 2.50}}
 G_wasteBoardCoord = {['position'] = {3.00, 0.96, 0.00}, ['rotation'] = {0.00, 90.00, 0.00}, ['scale'] = {2.50, 1.00, 2.50}}
+G_manualCoord = {['position'] = {-40.89, 10.00, 0.00}, ['rotation'] = {45.00, 90.00, 0.00}, ['scale'] = {5.40, 1.00, 5.40}}
 G_privateBoardPos = {
     [1] = {16.00, 0.96, -8.00},
     [2] = {-16.00, 0.96, -8.00},
@@ -110,12 +111,14 @@ function initialObjects()
     nPrivateBoard = getObjectFromGUID('eaf266')
     nComBoard = getObjectFromGUID('770dd9')
     nSelectBtn = getObjectFromGUID('1c0ed5')
+    nManual = getObjectFromGUID('997bc2')
 
     cDeck = getObjectFromGUID('e342d8')
     cRefCard = getObjectFromGUID('4e7350')
     cPrivateBoard = getObjectFromGUID('0bd666')
     cComBoard = getObjectFromGUID('25d924')
     cSelectBtn = getObjectFromGUID('a617e6')
+    cManual = getObjectFromGUID('85ae28')
 end
 
 function setSelectButton()
@@ -145,6 +148,7 @@ function setGame(object)
         tDeckBoard = nComBoard.clone()
         tWasteBoard = nComBoard.clone()
         tDeck = nDeck.clone()
+        tManual = nManual.clone()
 
         for i = 1, 4 do
             tPrivateBoard[i] = nPrivateBoard.clone()
@@ -156,6 +160,7 @@ function setGame(object)
         tDeckBoard = cComBoard.clone()
         tWasteBoard = cComBoard.clone()
         tDeck = cDeck.clone()
+        tManual = cManual.clone()
 
         for i = 1, 4 do
             tPrivateBoard[i] = cPrivateBoard.clone()
@@ -226,6 +231,10 @@ function setGame(object)
     tDeck.setScale(G_cardScale)
     tDeck.shuffle()
 
+    tManual.setPosition(G_manualCoord.position)
+    tManual.setRotation(G_manualCoord.rotation)
+    tManual.setScale(G_manualCoord.scale)
+
     local textToolSpawnData = {
         type = '3DText',
         sound = false
@@ -271,12 +280,14 @@ function setGame(object)
     nPrivateBoard.destroy()
     nComBoard.destroy()
     nSelectBtn.destroy()
+    nManual.destroy()
 
     cDeck.destroy()
     cRefCard.destroy()
     cPrivateBoard.destroy()
     cComBoard.destroy()
     cSelectBtn.destroy()
+    cManual.destroy()
 end
 
 function calculateScore()
